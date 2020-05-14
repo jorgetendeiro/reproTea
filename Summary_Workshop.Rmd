@@ -133,7 +133,8 @@ I suggest that at the end of each working session you always commit and push to 
 
 Then, whenever you open RStudio and start working again, you always start by _pulling_ the latest version from GitHub. Just go to the right-top panel of RStudio, under the Git tab, and press the `Pull` button (the button is to be seen, e.g., in \autoref{rstudio_git_changes}). I do this all the time because I work on different computers (in my office, laptop, home desktop). By keeping the latest version in GitHub, I can resume work on the latest version from any of my machines, without worries of mismatch of versions. Plus, if any of my computers dies, the code is all safe in GitHub!
 
-
+# Request
+Please let me know ([j.n.tendeiro@rug.nl](<mailto:j.n.tendeiro@rug.nl>)) whether this `manual' worked for you; feedback is appreciated. In case it did not work, do not despair: You can email me and perhaps together we can crack that nut!
 
 
 
