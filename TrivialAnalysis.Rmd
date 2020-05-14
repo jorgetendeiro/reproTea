@@ -1,0 +1,77 @@
+---
+title: "My trivial analysis"
+author: "J. N. Tendeiro"
+date: "14 May 2020"
+monofont: "Fira Code"
+output: 
+  pdf_document:
+    latex_engine: xelatex
+    include:
+      in_header: preamble.tex
+    highlight: zenburn
+---
+
+```{r setup, include = FALSE}
+library(magrittr) # pipe %>%
+library(psych)    # describe()
+library(knitr)    # kable()
+```
+
+# Generate data
+
+```{r data_generate}
+set.seed(123)
+n         <- 32
+x         <- rnorm(n)
+y         <- 1 + 2 * x + rnorm(n, 0, 2)
+fake.data <- data.frame(x, y) %>% round(2)
+head(fake.data) %>% kable
+```
+
+Save data to a CSV file in the working directory:
+
+```{r data_save}
+write.csv(fake.data, "FakeData.csv", row.names = FALSE)
+```
+
+# Descriptives
+
+```{r data_descriptives}
+describe(fake.data) %>% kable(digits = 2)
+```
+
+# Fit regression model
+
+```{r reg_fit}
+lm.res <- lm(y ~ x)
+```
+
+Coefficients:
+```{r reg_coef}
+summary(lm.res)$coef %>% kable(digits = 2)
+```
+
+ANOVA table:
+```{r reg_ANOVA}
+anova(lm.res) %>% kable(digits = 2)
+```
+
+Plot:
+```{r reg_plot}
+plot(x, y, xlim = c(-2, 2), ylim = c(-8, 8), 
+     pch = 4, col = "coral", lwd = 2, 
+     bty = "n", xlab = "", ylab = "", axes = FALSE)
+abline(lm.res, col = "coral", lwd = 2)
+axis(1, at = seq(-2, 2, 1), pos = -8)
+mtext("My cute x label", 1, 2)
+axis(2, at = seq(-8, 8, 2), pos = -2, las = 1)
+mtext("My even cuter y label", 2, 2)
+# Add prediction bands (blue = predicted mean, coral = predicted y value):
+conf.mean <- predict(lm.res, newdata = fake.data, interval = "confidence", level = 0.95)
+matlines(x[order(x)], conf.mean[order(x), 2:3], col = "blue", lty = 2)
+conf.ind  <- predict(lm.res, newdata = fake.data, interval = "prediction", level = 0.95)
+matlines(x[order(x)], conf.ind [order(x), 2:3], col = "coral", lty = 2)
+```
+
+# Conclusion
+The effect of $x$ on $y$ is statistically significant. Publish and rejoice.
