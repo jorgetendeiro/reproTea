@@ -61,7 +61,7 @@ include_graphics("images/SSH.png")
 
 Finally, and if not done yet, create a [GitHub account](https://github.com/). Remember to use the same email as the one you used above when setting up Git.
 
-At this point you are _good ot go_!
+Phew! At this point you are _good ot go_!!
 
 # Create a new repository in GitHub
 
@@ -69,7 +69,7 @@ I always create a new repository in GitHub first and then bring it to RStudio (t
 ```{r, fig.align = "center", out.width = "90%", echo = FALSE, fig.cap = "\\label{github_new_repo}Create a new repository in GitHub."}
 include_graphics("images/github_new_repo.png")
 ```
-Here, fill in the name for the repository under `Repository name` (in our Workshop I used `reproTea`) and add a small description under `Description`. Choose whether the repository should be public or private. Finally, do check the option to initialize the repository with a README. When you are done, press the green `Create repository` button on the button. See \autoref{github_create_repo}.
+Here, fill in the name for the repository under `Repository name` (in our workshop I used `reproTea`) and add a small description under `Description`. Choose whether the repository should be public or private. Finally, do check the option to initialize the repository with a README. When you are done, press the green `Create repository` button. See \autoref{github_create_repo}.
 ```{r, fig.align = "center", out.width = "90%", echo = FALSE, fig.cap = "\\label{github_create_repo}Details in creating a new repository in GitHub."}
 include_graphics("images/github_create_repo.png")
 ```
@@ -89,12 +89,12 @@ include_graphics("images/clone_git.png")
 ```
 
 # Work on your project
-Now it's time to get your hands dirty. Work on whatever files you want. Whataever files you create within RStudio (.R, .Rmd, .tex, .py, etc.) are automatically saved in the correct working directory (check the low-right corner in RStudio under the `Files ` tab, my working directory is  `Home/Documents/My GitHub/reproTea`; see \autoref{git_clone}). As soon as a file in the working directory is added or modified, Git makes notice of it right away. You can see that by looking at the right-top panel of RStudio, under the Git tab. For instance, as I type these notes, I created an RMarkdown called `Summary_Workshop.Rmd`. It knits into a PDF file with the same name. And, all the images you see in this document are screenshots that I placed inside a folder called `images`. I still didn't commit these changes, so Git is listing these files as being new or having been updated (\autoref{rstudio_git_changes}).
+Now it's time to get your hands dirty. Work on whatever files you want. Whatever files you create within RStudio (.R, .Rmd, .tex, .py, etc.) are automatically saved in the correct working directory (check the low-right corner in RStudio under the `Files ` tab; my working directory is  `Home/Documents/My GitHub/reproTea`, see \autoref{git_clone}). As soon as a file in the working directory is added or modified, Git makes notice of it right away. You can see that by looking at the right-top panel of RStudio, under the Git tab. For instance, as I type these notes, I created an RMarkdown file called `Summary_Workshop.Rmd`. It knits into a PDF file with the same name. And, all the images you see in this document are screenshots that I placed inside a folder called `images`. I still didn't commit these changes, so Git is listing these files as being new or having been updated (\autoref{rstudio_git_changes}).
 ```{r, fig.align = "center", out.width = "90%", echo = FALSE, fig.cap = "\\label{rstudio_git_changes}Git in RStudio keeping track of the files that suffered changes (top-right)."}
 include_graphics("images/rstudio_git_changes.png")
 ```
 
-In case you work on files outside RStudio, _just make sure to save them all in the working directory_. RStudio will show all such files (low-right corner in RStudio under the `Files ` tab), and Git will also notice them (right-top panel of RStudio, under the Git tab). So, feel free to e.g. use Jasp on a data file and save all files, or write a .xdoc file, or whatever. All such files are Git'able.
+In case you work on files outside RStudio, _just make sure to save them all in the working directory_. RStudio will show all such files (low-right corner in RStudio under the `Files ` tab), and Git will also notice them (right-top panel of RStudio, under the Git tab). So, feel free to e.g. use Jasp on a data file and save all files, or write a .docx file, or whatever. All such files are Git'able.
 
 # Stage, commit, and push
 ## Stage
@@ -104,7 +104,46 @@ include_graphics("images/staged.png")
 ```
 
 ## Commit
-Next, press the `Commit` button (\autoref{staged}); a new window opens. Here, you can see what changes _some_ files suffered. This at least works for text files like the .Rmd that I am typing on now (it won't work for .png images, for instance). Green color means new text, red color means erased text. Anyway, we will now _commit_ this version of the repository. In wording, we will create a snapshot _in your local PC_ of the current status of all files of the repository. I need to stress this again: This is a _local_ backup of the current state of the project. This will not be seen by GitHub just yet (for that we do need to _push_, see below). Give the commit a sensible short description of what you did ()
+Next, press the `Commit` button (\autoref{staged}); a new window opens (\autoref{commit}). Here, you can see the changes that the files suffered. This at least works for text files like the .Rmd that I am typing on now (it won't work for .png images, for instance). Green color means new text, red color means erased text. I typically don't look at this, to be fully honest. Anyway, we will now _commit_ this version of the repository. In wording, we will create a snapshot _in your local PC_ of the current status of all files of the repository. I need to stress this again: This is a _local_ backup of the current state of the project. This will not be seen by GitHub just yet (for that we do need to _push_, see below). Give the commit a sensible short description of what you did. Then press the `Commit` button (\autoref{commit}).
+```{r, fig.align = "center", out.width = "90%", echo = FALSE, fig.cap = "\\label{commit}Commited files, done locally."}
+include_graphics("images/commit.png")
+```
+Afterwards, you will see that the files version on your PC is now more recent than the version on GitHub. This is what the message `Your branch is ahead of 'origin/master' by 1 commit` means (\autoref{after_commit}).
+```{r, fig.align = "center", out.width = "90%", echo = FALSE, fig.cap = "\\label{after_commit}After doing the commit."}
+include_graphics("images/after_commit.png")
+```
+
+You can do as many of these (local) commits as you feel like. I suggest you do a commit each time you reach a certain milestone (after finishing a section, or after editing a particular file). The commits don't take a lot of space, and they will keep a nice story of the development of the files.
+
+Whenever you are ready to upload all the commits to Github, you will then use the `push` option.
+
+## Push
+Simply press the `push` button, to be seen on the right-end of \autoref{after_commit}. Because we set up the SSH keys, you won't need to fill in the username and password at this point. Just wait a few seconds and it will be over (\autoref{push}). Then you can press the `Close` button.
+```{r, fig.align = "center", out.width = "90%", echo = FALSE, fig.cap = "\\label{push}Pushing the changes to GitHub."}
+include_graphics("images/push.png")
+```
+
+And now, go back to GitHub and admire in wonder! See \autoref{github_after}.
+```{r, fig.align = "center", out.width = "90%", echo = FALSE, fig.cap = "\\label{github_after}GitHub is now up to speed. In my case, see the files associated to the commit called \`First version of summary notes {(}Summary\\_Workshop.Rmd{)}\'."}
+include_graphics("images/github_after.png")
+```
+
+# Final advice
+I suggest that at the end of each working session you always commit and push to Github.
+
+Then, whenever you open RStudio and start working again, you always start by _pulling_ the latest version from GitHub. Just go to the right-top panel of RStudio, under the Git tab, and press the `Pull` button (the button is to be seen, e.g., in \autoref{rstudio_git_changes}). I do this all the time because I work on different computers (in my office, laptop, home desktop). By keeping the latest version in GitHub, I can resume work on the latest version from any of my machines, without worries of mismatch of versions. Plus, if any of my computers dies, the code is all safe in GitHub!
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
